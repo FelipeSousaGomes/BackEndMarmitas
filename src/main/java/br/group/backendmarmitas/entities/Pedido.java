@@ -7,7 +7,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_pedido")
@@ -23,8 +26,6 @@ public class Pedido {
 
     private Instant data;
 
-    private Double total;
-
     @Enumerated(EnumType.STRING)
     private StatusDoPedido status;
 
@@ -35,6 +36,9 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "entregador_id")
     private Entregador entregador;
+
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ItemPedido> itens = new HashSet<>();
 
 
 }
