@@ -1,6 +1,7 @@
 package br.group.backendmarmitas.controllers;
 
 import br.group.backendmarmitas.entities.Produto;
+import br.group.backendmarmitas.entities.dto.ProdutoDTO;
 import br.group.backendmarmitas.services.ProdutoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/produtos")
@@ -18,40 +20,39 @@ public class ProdutoController {
     @Autowired
     private ProdutoService service;
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Produto> findById(@PathVariable Long id){
-        Produto produto = service.findById(id);
+    public ResponseEntity<ProdutoDTO> findById(@PathVariable Long id){
+        ProdutoDTO produto = service.findById(id);
         return  ResponseEntity.ok(produto);
     }
 
-  /*  @GetMapping
-    public ResponseEntity<Page<ProductMinDTO>> findAll(@RequestParam(name = "name" ,defaultValue = "")
-                                                       String name , Pageable pageable){
+   @GetMapping
+    public ResponseEntity<List<ProdutoDTO>> findAll(){
 
-        Page<ProductMinDTO> dto =service.findAll(name,pageable);
+        List<ProdutoDTO> dto =service.findAll();
         return ResponseEntity.ok(dto);
-    } */
+    }
 
 
     @PostMapping
-    public ResponseEntity<Produto >insert( @RequestBody Produto produto){
+    public ResponseEntity<ProdutoDTO >insert( @RequestBody ProdutoDTO dto){
 
-        produto =  service.Insert(produto);
+        dto =  service.Insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(produto.getId()).toUri();
-        return ResponseEntity.created(uri).body(produto);
+                .buildAndExpand(dto.getId()).toUri();
+        return ResponseEntity.created(uri).body(dto);
     }
 
- /*   @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+
     @PutMapping (value = "/{id}")
-    public ResponseEntity<ProductDTO> Update(@PathVariable Long id,@RequestBody ProductDTO dto){
+    public ResponseEntity<ProdutoDTO> Update(@PathVariable Long id,@RequestBody ProdutoDTO dto){
         dto = service.Update(id,dto);
         return  ResponseEntity.ok(dto);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+
     @DeleteMapping (value = "/{id}")
     public ResponseEntity<Void> Delete(@PathVariable Long id){
         service.delete(id);
         return ResponseEntity.noContent().build();
-    }   */
+    }
 }

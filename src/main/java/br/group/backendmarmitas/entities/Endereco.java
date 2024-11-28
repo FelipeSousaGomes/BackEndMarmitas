@@ -17,12 +17,13 @@ public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String NomeEndereco;
+    private String nomeEndereco;
     private Double latitude;
     private Double longitude;
     private String CEP;
 
-    @OneToOne(mappedBy = "endereco", cascade = CascadeType.ALL)
+    @OneToOne
+    @MapsId
     private User user;
 
 }

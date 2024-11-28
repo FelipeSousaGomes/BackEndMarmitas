@@ -1,4 +1,5 @@
 package br.group.backendmarmitas.entities.dto;
 
-public class AuthenticatorDTO {
+public record AuthenticatorDTO(String email, String senha) {
+
 }

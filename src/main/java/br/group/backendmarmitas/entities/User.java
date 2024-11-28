@@ -1,15 +1,14 @@
 package br.group.backendmarmitas.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 
 @Entity
@@ -18,8 +17,8 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class User {
+@EqualsAndHashCode(of = "id")
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,11 +29,57 @@ public class User {
     private String telefone;
     private String senha;
 
+    private UserRole role;
+
+    public User(String email , String senha, UserRole role, String telefone , String CPF,String nome){
+        this.email = email;
+        this.senha = senha;
+        this.role = role;
+        this.telefone = telefone;
+        this.CPF = CPF;
+        this.nome = nome;
+    }
+
+
     @OneToMany(mappedBy = "user")
     private List<Pedido> pedidos = new ArrayList<>();
 
-    @OneToOne
-    @MapsId
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Endereco endereco;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if(this.role == UserRole.ADMIN)  return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"),new SimpleGrantedAuthority("ROLE_USER"));
+        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    @Override
+    public String getPassword() {
+        return senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
