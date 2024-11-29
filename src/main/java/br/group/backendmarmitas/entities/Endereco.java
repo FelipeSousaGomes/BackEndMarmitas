@@ -17,13 +17,14 @@ public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nomeEndereco;
-    private Double latitude;
-    private Double longitude;
-    private String CEP;
+    private String rua;
+    private String descricao;
+    private String cep;
+    private String complemento;
+    private Integer numero;
 
-    @OneToOne
-    @MapsId
+    @ManyToOne
+    @JoinColumn(name = "user_id") // Usando @ManyToOne caso queira salvar apenas o id
     private User user;
-
 }
+

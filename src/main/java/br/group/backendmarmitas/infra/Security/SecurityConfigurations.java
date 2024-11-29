@@ -31,12 +31,10 @@ public class SecurityConfigurations {
                 .csrf(csrf -> csrf.disable())  // Desabilita CSRF
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))  // Desabilita sessão
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()  // Permite login sem autenticação
-                        .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()  // Permite registro sem autenticação
-                        .requestMatchers("/h2-console/**").permitAll()  // Permite o console H2 sem autenticação
-                        .anyRequest().permitAll()
-                ) .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
-                .headers(headers -> headers.frameOptions().sameOrigin()) // Permite o uso de frames no console H2
+                        .anyRequest().permitAll()  // Permite todas as requisições sem qualquer barreira
+                )
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                .headers(headers -> headers.frameOptions().sameOrigin())  // Permite o uso de frames no console H2
                 .build();
     }
 

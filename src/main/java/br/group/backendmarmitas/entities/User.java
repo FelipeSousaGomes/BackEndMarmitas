@@ -31,7 +31,17 @@ public class User implements UserDetails {
 
     private UserRole role;
 
-    public User(String email , String senha, UserRole role, String telefone , String CPF,String nome){
+    public User(Long id, String nome, String CPF, String email, String telefone, String senha, UserRole role) {
+        this.id = id;
+        this.nome = nome;
+        this.CPF = CPF;
+        this.email = email;
+        this.telefone = telefone;
+        this.senha = senha;
+        this.role = role;
+    }
+
+    public User(String email , String senha, UserRole role, String telefone , String CPF, String nome){
         this.email = email;
         this.senha = senha;
         this.role = role;
@@ -44,8 +54,8 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private List<Pedido> pedidos = new ArrayList<>();
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Endereco endereco;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Endereco> enderecos = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
