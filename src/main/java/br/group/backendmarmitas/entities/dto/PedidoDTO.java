@@ -1,7 +1,6 @@
 package br.group.backendmarmitas.entities.dto;
 
 import br.group.backendmarmitas.entities.*;
-import jakarta.persistence.*;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ public class PedidoDTO {
     private Long id;
     private Instant data;
     private StatusDoPedido status;
-    private UserDTO user;
+    private UserMinDTO user;
     private EntregadorDTO entregador;
 
     List<ItemPedidoDTO> ItensPedido = new ArrayList<>();
@@ -23,7 +22,7 @@ public class PedidoDTO {
       this.id = pedido.getId();
       this.data = pedido.getData();
       this.status = pedido.getStatus();
-      this.user = new UserDTO(pedido.getUser());
+      this.user = new UserMinDTO(pedido.getUser());
       this.entregador = new EntregadorDTO(pedido.getEntregador());
         for (ItemPedido item: pedido.getItens()){
             ItensPedido.add(new ItemPedidoDTO(item));

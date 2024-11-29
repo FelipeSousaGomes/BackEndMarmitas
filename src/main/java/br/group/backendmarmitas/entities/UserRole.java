@@ -1,8 +1,8 @@
 package br.group.backendmarmitas.entities;
 
 public enum UserRole {
-    ADMIN("admin"),
-    USER("user");
+    admin("admin"),
+    user("user");
 
     private String role;
 

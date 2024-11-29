@@ -34,7 +34,7 @@ public class DBservice {
         Entregador entregador5 = new Entregador(null, "Ana Souza", "MNO-112", Disponibilidade.EM_ROTA, 7);
         entregadorRepository.save(entregador5);
 
-        User user1 = new User(null,"Felipe","089.921.978-30","felipe@email.com","(62) 98162713","12345678", UserRole.USER);
+        User user1 = new User(null,"Felipe","089.921.978-30","felipe@email.com","(62) 98162713","12345678", UserRole.admin);
 
                 userRepository.save(user1);
     }
