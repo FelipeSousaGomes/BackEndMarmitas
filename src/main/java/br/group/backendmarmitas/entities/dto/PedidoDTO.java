@@ -29,6 +29,53 @@ public class PedidoDTO {
         }
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Instant getData() {
+        return data;
+    }
+
+    public void setData(Instant data) {
+        this.data = data;
+    }
+
+    public StatusDoPedido getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusDoPedido status) {
+        this.status = status;
+    }
+
+    public UserMinDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserMinDTO user) {
+        this.user = user;
+    }
+
+    public EntregadorDTO getEntregador() {
+        return entregador;
+    }
+
+    public void setEntregador(EntregadorDTO entregador) {
+        this.entregador = entregador;
+    }
+
+    public List<ItemPedidoDTO> getItensPedido() {
+        return ItensPedido;
+    }
+
+    public void setItensPedido(List<ItemPedidoDTO> itensPedido) {
+        ItensPedido = itensPedido;
+    }
 
     public Double getTotal(){
         double sum = 0.0;
