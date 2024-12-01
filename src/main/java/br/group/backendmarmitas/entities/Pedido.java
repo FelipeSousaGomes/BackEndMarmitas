@@ -39,6 +39,4 @@ public class Pedido {
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ItemPedido> itens = new HashSet<>();
-
-
 }

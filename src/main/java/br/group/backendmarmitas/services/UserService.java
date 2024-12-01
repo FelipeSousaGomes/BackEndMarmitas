@@ -21,6 +21,10 @@ public class UserService {
         return new UserDTO(user);
     }
 
+    public User findCompletUserById(Long id) {
+        return userRepository.findById(id).orElseThrow();
+    }
+
 
 
     public List<UserDTO> findAll() {
