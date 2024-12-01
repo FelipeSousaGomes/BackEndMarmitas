@@ -1,24 +1,23 @@
 package br.group.backendmarmitas.controllers;
 
-
 import br.group.backendmarmitas.entities.User;
 import br.group.backendmarmitas.entities.dto.AuthenticatorDTO;
 import br.group.backendmarmitas.entities.dto.RegisterDTO;
 import br.group.backendmarmitas.infra.Security.TokenService;
 import br.group.backendmarmitas.repositories.UserRepository;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.net.Authenticator;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("auth")
@@ -32,13 +31,19 @@ public class AuthenticatorController {
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AuthenticatorDTO dto){
-        var userNamePassword = new UsernamePasswordAuthenticationToken(dto.email(),dto.senha());
-        var auth = this.authenticationManager.authenticate(userNamePassword);
+    public ResponseEntity<Map<String, Object>> login(@RequestBody @Valid AuthenticatorDTO dto) {
+        var authenticationToken = new UsernamePasswordAuthenticationToken(dto.email(), dto.senha());
+        Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
 
-        var token = tokenService.generateToken((User) auth.getPrincipal());
 
-        return  ResponseEntity.ok(token);
+        User user = (User) authentication.getPrincipal();
+        String token = tokenService.generateToken(user);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("token", token);
+        response.put("user", user); // Adiciona o objeto User diretamente
+
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping ("/register")
