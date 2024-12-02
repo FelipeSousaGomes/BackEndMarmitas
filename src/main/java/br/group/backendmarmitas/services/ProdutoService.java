@@ -25,7 +25,9 @@ public class ProdutoService {
         return new ProdutoDTO(prod);
 
     }
-
+    public Produto findCompleteProductFromId(Long id) {
+        return repository.findById(id).get();
+    }
     public ProdutoDTO Insert(ProdutoDTO dto) {
         Produto prod = new Produto();
         copyDtoToEntity(dto,prod);
