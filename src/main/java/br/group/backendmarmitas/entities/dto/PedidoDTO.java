@@ -11,7 +11,7 @@ public class PedidoDTO {
     private Instant data;
     private StatusDoPedido status;
     private UserMinDTO user;
-    private EntregadorDTO entregador;
+    private EnderecoDTO endereco;
 
     List<ItemPedidoDTO> ItensPedido = new ArrayList<>();
 
@@ -23,7 +23,7 @@ public class PedidoDTO {
       this.data = pedido.getData();
       this.status = pedido.getStatus();
       this.user = new UserMinDTO(pedido.getUser());
-      this.entregador = new EntregadorDTO(pedido.getEntregador());
+      this.endereco = new EnderecoDTO(pedido.getEndereco());
         for (ItemPedido item: pedido.getItens()){
             ItensPedido.add(new ItemPedidoDTO(item));
         }
@@ -61,12 +61,12 @@ public class PedidoDTO {
         this.user = user;
     }
 
-    public EntregadorDTO getEntregador() {
-        return entregador;
+    public EnderecoDTO getEndereco() {
+        return endereco;
     }
 
-    public void setEntregador(EntregadorDTO entregador) {
-        this.entregador = entregador;
+    public void setEndereco(EnderecoDTO endereco) {
+        this.endereco = endereco;
     }
 
     public List<ItemPedidoDTO> getItensPedido() {

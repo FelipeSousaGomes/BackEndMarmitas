@@ -1,16 +1,17 @@
 package br.group.backendmarmitas.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.Instant;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+
+import java.time.Instant;
+;
 
 @Entity
 @Table(name = "tb_pedido")
@@ -34,11 +35,10 @@ public class Pedido {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "entregador_id")
-    private Entregador entregador;
+    @JoinColumn(name = "endereco_id")
+    @JsonBackReference  // Impede a serialização do campo "endereco" em "Pedido"
+    private Endereco endereco;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ItemPedido> itens = new HashSet<>();
-
-
 }

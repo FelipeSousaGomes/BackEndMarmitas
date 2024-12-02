@@ -38,7 +38,7 @@ public class PedidoController {
     }
     @PutMapping (value = "/{id}")
     public ResponseEntity<PedidoDTO> update(@Valid @RequestBody PedidoDTO dto, @PathVariable Long id){
-        dto = pedidoService.Update(id,dto);
+        dto = pedidoService.update(id,dto);
         return  ResponseEntity.ok(dto);
     }
 
