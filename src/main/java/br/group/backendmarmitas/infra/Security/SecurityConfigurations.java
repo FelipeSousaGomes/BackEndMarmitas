@@ -31,6 +31,7 @@ public class SecurityConfigurations {
                 .csrf(csrf -> csrf.disable())  // Desabilita CSRF
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))  // Desabilita sessão
                 .authorizeHttpRequests(authorize -> authorize
+
                         .anyRequest().permitAll()  // Permite todas as requisições sem qualquer barreira
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
