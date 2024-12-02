@@ -1,5 +1,6 @@
 package br.group.backendmarmitas.controllers;
 
+import br.group.backendmarmitas.entities.Endereco;
 import br.group.backendmarmitas.entities.dto.EnderecoDTO;
 
 import br.group.backendmarmitas.services.EnderecoService;
@@ -32,6 +33,10 @@ public class EnderecoController {
         return ResponseEntity.ok(dto);
     }
 
+    @GetMapping("/usuario/{idUsuario}")
+    public List<EnderecoDTO> findByUsuario(@PathVariable Long idUsuario){
+        return service.findByUserId(idUsuario);
+    }
 
     @PostMapping
     public ResponseEntity<EnderecoDTO >insert( @RequestBody EnderecoDTO dto){

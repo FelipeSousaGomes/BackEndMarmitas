@@ -16,6 +16,9 @@ public class EnderecoService {
     @Autowired
     EnderecoRepository enderecoRepository;
 
+    public List<EnderecoDTO> findByUserId(Long userId) {
+        return enderecoRepository.findByUserId(userId);
+    }
     public EnderecoDTO Insert (EnderecoDTO dto) {
         Endereco endereco = new Endereco();
 

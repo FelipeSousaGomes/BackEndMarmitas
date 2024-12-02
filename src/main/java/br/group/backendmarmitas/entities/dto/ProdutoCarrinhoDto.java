@@ -3,10 +3,10 @@ package br.group.backendmarmitas.entities.dto;
 import br.group.backendmarmitas.entities.Produto;
 
 public class ProdutoCarrinhoDto {
-    private Produto produto;
+    private ProdutoDTO produto;
     private int quantidade;
 
-    public ProdutoCarrinhoDto(Produto produto, int quantidade) {
+    public ProdutoCarrinhoDto(ProdutoDTO produto, int quantidade) {
         this.produto = produto;
         this.quantidade = quantidade;
     }
@@ -14,11 +14,11 @@ public class ProdutoCarrinhoDto {
     public ProdutoCarrinhoDto() {
     }
 
-    public Produto getProduto() {
+    public ProdutoDTO getProduto() {
         return produto;
     }
 
-    public void setProduto(Produto produto) {
+    public void setProduto(ProdutoDTO produto) {
         this.produto = produto;
     }
 
