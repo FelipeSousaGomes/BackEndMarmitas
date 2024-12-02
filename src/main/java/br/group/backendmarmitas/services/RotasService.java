@@ -24,7 +24,7 @@ public class RotasService {
         String endereco1 = enderecoOrigem.getComplemento() + " - " + enderecoOrigem.getRua() + " - " + enderecoOrigem.getCep() + " - " + enderecoOrigem.getNumero();
         receberRotasDto.getEnderecos().add(0,endereco1);
         System.out.println(receberRotasDto.getEnderecos());
-        String url = "http://localhost:8090/api/rotas/";
+        String url = "https://apirotas.tigasolutions.com.br/api/rotas/";
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
