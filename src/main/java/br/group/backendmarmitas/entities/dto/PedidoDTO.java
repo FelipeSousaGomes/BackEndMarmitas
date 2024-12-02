@@ -104,4 +104,17 @@ public class PedidoDTO {
         return sum;
     }
 
+    @Override
+    public String
+    toString() {
+        return "PedidoDTO{" +
+                "id=" + id +
+                ", data=" + data +
+                ", status=" + status +
+                ", user=" + user +
+                ", endereco=" + endereco +
+                ", idCarrinho=" + idCarrinho +
+                ", ItensPedido=" + ItensPedido +
+                '}';
+    }
 }

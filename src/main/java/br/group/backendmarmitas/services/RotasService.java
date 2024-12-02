@@ -20,10 +20,7 @@ public class RotasService {
     private EnderecoService enderecoService;
     public EnvioRotasDto enviarRotas(ReceberRotasDto receberRotasDto) {
 
-        EnderecoDTO enderecoOrigem = enderecoService.findById(1L);
-        String endereco1 = enderecoOrigem.getComplemento() + " - " + enderecoOrigem.getRua() + " - " + enderecoOrigem.getCep() + " - " + enderecoOrigem.getNumero();
-        receberRotasDto.getEnderecos().add(0,endereco1);
-        System.out.println(receberRotasDto.getEnderecos());
+
         String url = "https://apirotas.tigasolutions.com.br/api/rotas/";
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
