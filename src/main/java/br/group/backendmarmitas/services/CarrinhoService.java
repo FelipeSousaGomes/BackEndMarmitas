@@ -3,11 +3,13 @@ package br.group.backendmarmitas.services;
 import br.group.backendmarmitas.entities.Carrinho;
 import br.group.backendmarmitas.entities.CarrinhoEnum;
 import br.group.backendmarmitas.entities.ItemCarrinho;
-import br.group.backendmarmitas.entities.dto.SalvarCarrinhoDto;
+import br.group.backendmarmitas.entities.Produto;
+import br.group.backendmarmitas.entities.dto.*;
 import br.group.backendmarmitas.repositories.CarrinhoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,10 +24,10 @@ public class CarrinhoService {
     private ItemCarrinhoService itemCarrinhoService;
 
 
+
     public Carrinho salvar(SalvarCarrinhoDto carrinho) {
         boolean verificar = verSeUsuarioPossuiCarrinhoPendente(carrinho);
         System.out.println(verificar);
-
         Carrinho carrinhoSalva = new Carrinho();
         if (verificar) {
             carrinhoSalva = findByUsuarioId(carrinho.getId_usuario());
@@ -69,6 +71,30 @@ public class CarrinhoService {
             itemCarrinhoService.salvar(itemCarrinho);
         }
         return carrinhoSalva;
+    }
+
+    public CarrinhoEItemsDto pegarCarrinhoEItensPorUsuario(Long idUsuario) {
+        List<ProdutoCarrinhoDto> produtos = new ArrayList<>();
+        CarrinhoEItemsDto carrinhoEItemsDto = new CarrinhoEItemsDto();
+        Carrinho carrinho = carrinhoRepository.findCarrinhoByUsuarioId(idUsuario);
+        CarrinhoDto carrinhoDto = new CarrinhoDto();
+        carrinhoDto.setId(carrinho.getId());
+        carrinhoDto.setStatus(carrinho.getStatus());
+        UserDTO usuarioDto = new UserDTO(carrinho.getUsuario());
+
+        carrinhoDto.setUsuario(usuarioDto);
+        carrinhoEItemsDto.setCarrinho(carrinhoDto);
+
+        List<ItemCarrinho> listaItensCarrinho = itemCarrinhoService.findByIdCarrinho(carrinho.getId());
+        for(ItemCarrinho item : listaItensCarrinho) {
+            ProdutoCarrinhoDto novoProduto = new ProdutoCarrinhoDto();
+            novoProduto.setProduto(produtoService.findCompleteProductFromId(item.getProduto().getId()));
+            novoProduto.setQuantidade(item.getQuantidade());
+            produtos.add(novoProduto);
+        }
+
+        carrinhoEItemsDto.setProdutos(produtos);
+        return carrinhoEItemsDto;
     }
     public Carrinho findByUsuarioId(Long id) {
         return carrinhoRepository.findCarrinhoByUsuarioId(id);

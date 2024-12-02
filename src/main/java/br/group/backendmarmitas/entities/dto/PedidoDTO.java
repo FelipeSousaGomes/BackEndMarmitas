@@ -12,7 +12,6 @@ public class PedidoDTO {
     private StatusDoPedido status;
     private UserMinDTO user;
     private EntregadorDTO entregador;
-
     List<ItemPedidoDTO> ItensPedido = new ArrayList<>();
 
   public PedidoDTO() {}

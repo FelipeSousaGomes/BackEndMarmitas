@@ -28,9 +28,9 @@ public class PedidoController {
     }
 
 
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<PedidoDTO >insert(@Valid @RequestBody PedidoDTO dto){
-
+        System.out.println(dto);
         dto =  pedidoService.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(dto.getId()).toUri();
