@@ -80,6 +80,8 @@ public class CarrinhoService {
     public CarrinhoEItemsDto pegarCarrinhoEItensPorUsuario(Long idUsuario) {
 
         Carrinho carrinho = carrinhoRepository.findCarrinhoByUsuarioStatus(idUsuario);
+
+        if(carrinho.getStatus().equals(CarrinhoEnum.PENDENTE)) {
             List<ProdutoCarrinhoDto> produtos = new ArrayList<>();
             CarrinhoEItemsDto carrinhoEItemsDto = new CarrinhoEItemsDto();
             CarrinhoDto carrinhoDto = new CarrinhoDto();
@@ -100,6 +102,8 @@ public class CarrinhoService {
 
             carrinhoEItemsDto.setProdutos(produtos);
             return carrinhoEItemsDto;
+        }
+       else return null;
     }
     public Carrinho findByUsuarioId(Long id) {
         return carrinhoRepository.findCarrinhoByUsuarioStatus(id);
