@@ -27,7 +27,8 @@ public class PedidoService {
     private UserRepository userRepository;
     @Autowired
     private EnderecoRepository enderecoRepository;
-
+    @Autowired
+    private CarrinhoService carrinhoService;
 
     public PedidoDTO findById(Long id) {
 
@@ -39,10 +40,12 @@ public class PedidoService {
 
     public @Valid PedidoDTO insert(@Valid PedidoDTO dto) {
         // Cria uma nova entidade Pedido
+
         Pedido pedido = new Pedido();
+
         pedido.setData(Instant.now());
         pedido.setStatus(StatusDoPedido.PREPARANDO);
-
+        carrinhoService.mudarStatus(dto.getIdCarrinho());
         // Associa o usuário ao pedido
         User user = userRepository.findById(dto.getUser().getId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -133,9 +136,6 @@ public class PedidoService {
         // Retorna o DTO atualizado
         return new PedidoDTO(pedido);
     }
-
-
-
 
 
 

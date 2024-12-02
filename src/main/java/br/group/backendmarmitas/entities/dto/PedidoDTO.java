@@ -12,18 +12,29 @@ public class PedidoDTO {
     private StatusDoPedido status;
     private UserMinDTO user;
     private EnderecoDTO endereco;
+    private Long idCarrinho;
 
     List<ItemPedidoDTO> ItensPedido = new ArrayList<>();
 
   public PedidoDTO() {}
+    public PedidoDTO(Pedido pedido){
+        this.id = pedido.getId();
+        this.data = pedido.getData();
+        this.status = pedido.getStatus();
+        this.user = new UserMinDTO(pedido.getUser());
+        this.endereco = new EnderecoDTO(pedido.getEndereco());
+        for (ItemPedido item: pedido.getItens()){
+            ItensPedido.add(new ItemPedidoDTO(item));
+        }
+    }
 
-
-    public PedidoDTO(Pedido pedido) {
+    public PedidoDTO(Pedido pedido, Long idCarrinho){
       this.id = pedido.getId();
       this.data = pedido.getData();
       this.status = pedido.getStatus();
       this.user = new UserMinDTO(pedido.getUser());
       this.endereco = new EnderecoDTO(pedido.getEndereco());
+      this.idCarrinho = idCarrinho;
         for (ItemPedido item: pedido.getItens()){
             ItensPedido.add(new ItemPedidoDTO(item));
         }
@@ -31,6 +42,14 @@ public class PedidoDTO {
 
     public Long getId() {
         return id;
+    }
+
+    public Long getIdCarrinho() {
+        return idCarrinho;
+    }
+
+    public void setIdCarrinho(Long idCarrinho) {
+        this.idCarrinho = idCarrinho;
     }
 
     public void setId(Long id) {

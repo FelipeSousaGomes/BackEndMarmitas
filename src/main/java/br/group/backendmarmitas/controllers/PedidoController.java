@@ -28,12 +28,13 @@ public class PedidoController {
     }
 
 
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<PedidoDTO >insert(@Valid @RequestBody PedidoDTO dto){
 
         dto =  pedidoService.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(dto.getId()).toUri();
+
         return ResponseEntity.created(uri).body(dto);
     }
     @PutMapping (value = "/{id}")
