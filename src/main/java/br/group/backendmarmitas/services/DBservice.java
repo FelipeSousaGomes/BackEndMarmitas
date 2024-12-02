@@ -39,11 +39,11 @@ public class DBservice {
         userRepository.saveAll(Arrays.asList(user1, user2));
 
         // Seeding de Produtos
-        Produto produto1 = new Produto(null, "Marmita Tradicional", "Arroz, feijão, bife e salada", "https://example.com/marmita1.jpg", 12.50, 4, null);
-        Produto produto2 = new Produto(null, "Marmita Fitness", "Frango grelhado, batata doce e brócolis", "https://example.com/marmita2.jpg", 15.00, 5, null);
-        Produto produto3 = new Produto(null, "Marmita Vegana", "Quinoa, legumes grelhados e tofu", "https://example.com/marmita3.jpg", 14.00, 4, null);
-        Produto produto4 = new Produto(null, "Marmita Infantil", "Macarrão, nuggets e purê", "https://example.com/marmita4.jpg", 10.00, 3, null);
-        Produto produto5 = new Produto(null, "Marmita Premium", "Picanha, arroz à grega e farofa", "https://example.com/marmita5.jpg", 20.00, 5, null);
+        Produto produto1 = new Produto(null, "Marmita Tradicional", "Arroz, feijão, bife e salada", "https://crsupermercados.com.br/cdn/shop/files/marmita-frango_700x.png?v=1709309213", 12.50, 4, null);
+        Produto produto2 = new Produto(null, "Marmita Fitness", "Frango grelhado, batata doce e brócolis", "https://crsupermercados.com.br/cdn/shop/files/marmitex_picadinho_450g.png?v=1710517941", 15.00, 5, null);
+        Produto produto3 = new Produto(null, "Marmita Vegana", "Quinoa, legumes grelhados e tofu", "https://crsupermercados.com.br/cdn/shop/files/marmita-carne_700x.png?v=1709309247", 14.00, 4, null);
+        Produto produto4 = new Produto(null, "Marmita Infantil", "Macarrão, nuggets e purê", "https://crsupermercados.com.br/cdn/shop/files/marmita-peixe_700x.png?v=1711972358", 10.00, 3, null);
+        Produto produto5 = new Produto(null, "Marmita Premium", "Picanha, arroz à grega e farofa", "https://crsupermercados.com.br/cdn/shop/files/marmitex_almondega_450g_700x.png?v=1710518837", 20.00, 5, null);
 
         produtoRepository.saveAll(Arrays.asList(produto1, produto2, produto3, produto4, produto5));
 
