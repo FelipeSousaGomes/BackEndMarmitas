@@ -36,7 +36,9 @@ public class PedidoService {
         return new PedidoDTO(pedido);
 
     }
-
+    public List<PedidoDTO> listaPedidosPorUsuario(Long idUsuario) {
+        return pedidoRepository.findPedidoByUserId(idUsuario);
+    }
 
     public @Valid PedidoDTO insert(@Valid PedidoDTO dto) {
         // Cria uma nova entidade Pedido

@@ -43,6 +43,11 @@ public class PedidoController {
         return  ResponseEntity.ok(dto);
     }
 
+    @GetMapping("/usuario/{idUsuario}")
+    public List<PedidoDTO> listaPedidosPorUsuario(@PathVariable Long idUsuario){
+        return pedidoService.listaPedidosPorUsuario(idUsuario);
+    }
+
     @GetMapping
     public ResponseEntity<List<PedidoDTO>> findAll(){
 
