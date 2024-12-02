@@ -27,8 +27,7 @@ public class Entregador {
     private Disponibilidade disponibilidade;
     private Integer capacidade ;
 
-    @OneToMany(mappedBy = "entregador")
-    private List<Pedido> pedidos;
+
 
     @OneToMany(mappedBy = "entregador")
     private List<Rota> rotas;

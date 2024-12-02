@@ -1,3 +1,4 @@
+
 package br.group.backendmarmitas.services;
 
 import br.group.backendmarmitas.entities.*;
@@ -19,6 +20,9 @@ public class DBservice {
     @Autowired
     private ProdutoRepository produtoRepository;
 
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+
     public void InstanciaDB() {
         // Seeding de Entregadores
         Entregador entregador1 = new Entregador(null, "Tiago Marques", "ABC-123", Disponibilidade.DISPONIVEL, 10);
@@ -31,7 +35,8 @@ public class DBservice {
 
         // Seeding de Usuários
         User user1 = new User(null, "Felipe", "089.921.978-30", "felipe@email.com", "(62) 98162713", "12345678", UserRole.admin);
-        userRepository.save(user1);
+        User user2 = new User(null, "João Silva", "999.888.777-66", "joao@email.com", "(62) 999123456", "password", UserRole.user);
+        userRepository.saveAll(Arrays.asList(user1, user2));
 
         // Seeding de Produtos
         Produto produto1 = new Produto(null, "Marmita Tradicional", "Arroz, feijão, bife e salada", "https://example.com/marmita1.jpg", 12.50, 4, null);
@@ -41,5 +46,12 @@ public class DBservice {
         Produto produto5 = new Produto(null, "Marmita Premium", "Picanha, arroz à grega e farofa", "https://example.com/marmita5.jpg", 20.00, 5, null);
 
         produtoRepository.saveAll(Arrays.asList(produto1, produto2, produto3, produto4, produto5));
+
+        // Seeding de Endereços
+        Endereco endereco1 = new Endereco(null, "Rua A", "Próximo ao supermercado", "12345-678", "Apto 101", 10, null, user1);
+        Endereco endereco2 = new Endereco(null, "Rua B", "Perto da escola", "23456-789", "Bloco B", 5, null, user2);
+        Endereco endereco3 = new Endereco(null, "Rua C", "Em frente à praça", "34567-890", "Casa 23", 12, null, user1);
+
+        enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2, endereco3));
     }
 }

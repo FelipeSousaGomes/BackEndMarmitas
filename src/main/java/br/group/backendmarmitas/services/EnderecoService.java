@@ -1,13 +1,10 @@
 package br.group.backendmarmitas.services;
 
 import br.group.backendmarmitas.entities.Endereco;
-import br.group.backendmarmitas.entities.Produto;
 import br.group.backendmarmitas.entities.User;
 import br.group.backendmarmitas.entities.dto.EnderecoDTO;
-import br.group.backendmarmitas.entities.dto.ProdutoDTO;
 import br.group.backendmarmitas.repositories.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
