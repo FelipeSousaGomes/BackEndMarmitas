@@ -3,6 +3,7 @@ package br.group.backendmarmitas.controllers;
 import br.group.backendmarmitas.entities.User;
 import br.group.backendmarmitas.entities.dto.AuthenticatorDTO;
 import br.group.backendmarmitas.entities.dto.RegisterDTO;
+import br.group.backendmarmitas.entities.dto.UserDTO;
 import br.group.backendmarmitas.infra.Security.TokenService;
 import br.group.backendmarmitas.repositories.UserRepository;
 import jakarta.validation.Valid;
@@ -39,9 +40,10 @@ public class AuthenticatorController {
         User user = (User) authentication.getPrincipal();
         String token = tokenService.generateToken(user);
 
+        UserDTO userData = new UserDTO(user);
         Map<String, Object> response = new HashMap<>();
         response.put("token", token);
-        response.put("user", user); // Adiciona o objeto User diretamente
+        response.put("user", userData);
 
         return ResponseEntity.ok(response);
     }
