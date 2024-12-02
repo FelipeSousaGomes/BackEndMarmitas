@@ -31,7 +31,6 @@ public class Endereco {
 
     @OneToMany(mappedBy = "endereco")
     @JsonManagedReference
-
     private List<Pedido> pedidos;
 
     @ManyToOne
