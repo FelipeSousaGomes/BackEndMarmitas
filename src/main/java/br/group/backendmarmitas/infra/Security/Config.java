@@ -15,6 +15,8 @@ public class Config {
     public Boolean InstanciaDB(){
         if (value.equals("create-drop")){
             this.dbService.InstanciaDB();
+        }if (value.equals("create")){
+            this.dbService.InstanciaDB();
         }
         return false;
     }
