@@ -36,14 +36,15 @@ public class DBservice {
         // Seeding de Usuários
         User user1 = new User(null, "Felipe", "089.921.978-30", "felipe@email.com", "(62) 98162713", "12345678", UserRole.admin);
         User user2 = new User(null, "João Silva", "999.888.777-66", "joao@email.com", "(62) 999123456", "password", UserRole.user);
+
         userRepository.saveAll(Arrays.asList(user1, user2));
 
         // Seeding de Produtos
-        Produto produto1 = new Produto(null, "Marmita Tradicional", "Arroz, feijão, bife e salada", "https://example.com/marmita1.jpg", 12.50, 4, null);
-        Produto produto2 = new Produto(null, "Marmita Fitness", "Frango grelhado, batata doce e brócolis", "https://example.com/marmita2.jpg", 15.00, 5, null);
-        Produto produto3 = new Produto(null, "Marmita Vegana", "Quinoa, legumes grelhados e tofu", "https://example.com/marmita3.jpg", 14.00, 4, null);
-        Produto produto4 = new Produto(null, "Marmita Infantil", "Macarrão, nuggets e purê", "https://example.com/marmita4.jpg", 10.00, 3, null);
-        Produto produto5 = new Produto(null, "Marmita Premium", "Picanha, arroz à grega e farofa", "https://example.com/marmita5.jpg", 20.00, 5, null);
+        Produto produto1 = new Produto(null, "Marmita Tradicional", "Arroz, feijão, bife e salada", "https://example.com/marmita1.jpg", 12.50, 4,null);
+        Produto produto2 = new Produto(null, "Marmita Fitness", "Frango grelhado, batata doce e brócolis", "https://example.com/marmita2.jpg", 15.00, 5,null);
+        Produto produto3 = new Produto(null, "Marmita Vegana", "Quinoa, legumes grelhados e tofu", "https://example.com/marmita3.jpg", 14.00, 4,null);
+        Produto produto4 = new Produto(null, "Marmita Infantil", "Macarrão, nuggets e purê", "https://example.com/marmita4.jpg", 10.00, 3,null);
+        Produto produto5 = new Produto(null, "Marmita Premium", "Picanha, arroz à grega e farofa", "https://example.com/marmita5.jpg", 20.00, 5,null);
 
         produtoRepository.saveAll(Arrays.asList(produto1, produto2, produto3, produto4, produto5));
 

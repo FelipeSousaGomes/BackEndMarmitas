@@ -24,7 +24,11 @@ public class CarrinhoService {
     private ItemCarrinhoService itemCarrinhoService;
 
 
-
+    public Carrinho mudarStatus(Long idCarrinho){
+        Carrinho carrinho = carrinhoRepository.findById(idCarrinho).get();
+        carrinho.setStatus(CarrinhoEnum.CONCLUIDO);
+        return carrinhoRepository.save(carrinho);
+    }
     public Carrinho salvar(SalvarCarrinhoDto carrinho) {
         boolean verificar = verSeUsuarioPossuiCarrinhoPendente(carrinho);
         System.out.println(verificar);
@@ -74,33 +78,34 @@ public class CarrinhoService {
     }
 
     public CarrinhoEItemsDto pegarCarrinhoEItensPorUsuario(Long idUsuario) {
-        List<ProdutoCarrinhoDto> produtos = new ArrayList<>();
-        CarrinhoEItemsDto carrinhoEItemsDto = new CarrinhoEItemsDto();
-        Carrinho carrinho = carrinhoRepository.findCarrinhoByUsuarioId(idUsuario);
-        CarrinhoDto carrinhoDto = new CarrinhoDto();
-        carrinhoDto.setId(carrinho.getId());
-        carrinhoDto.setStatus(carrinho.getStatus());
-        UserDTO usuarioDto = new UserDTO(carrinho.getUsuario());
 
-        carrinhoDto.setUsuario(usuarioDto);
-        carrinhoEItemsDto.setCarrinho(carrinhoDto);
+        Carrinho carrinho = carrinhoRepository.findCarrinhoByUsuarioStatus(idUsuario);
+            List<ProdutoCarrinhoDto> produtos = new ArrayList<>();
+            CarrinhoEItemsDto carrinhoEItemsDto = new CarrinhoEItemsDto();
+            CarrinhoDto carrinhoDto = new CarrinhoDto();
+            carrinhoDto.setId(carrinho.getId());
+            carrinhoDto.setStatus(carrinho.getStatus());
+            UserDTO usuarioDto = new UserDTO(carrinho.getUsuario());
 
-        List<ItemCarrinho> listaItensCarrinho = itemCarrinhoService.findByIdCarrinho(carrinho.getId());
-        for(ItemCarrinho item : listaItensCarrinho) {
-            ProdutoCarrinhoDto novoProduto = new ProdutoCarrinhoDto();
-            novoProduto.setProduto(produtoService.findCompleteProductFromId(item.getProduto().getId()));
-            novoProduto.setQuantidade(item.getQuantidade());
-            produtos.add(novoProduto);
-        }
+            carrinhoDto.setUsuario(usuarioDto);
+            carrinhoEItemsDto.setCarrinho(carrinhoDto);
 
-        carrinhoEItemsDto.setProdutos(produtos);
-        return carrinhoEItemsDto;
+            List<ItemCarrinho> listaItensCarrinho = itemCarrinhoService.findByIdCarrinho(carrinho.getId());
+            for (ItemCarrinho item : listaItensCarrinho) {
+                ProdutoCarrinhoDto novoProduto = new ProdutoCarrinhoDto();
+                novoProduto.setProduto(produtoService.findById(item.getProduto().getId()));
+                novoProduto.setQuantidade(item.getQuantidade());
+                produtos.add(novoProduto);
+            }
+
+            carrinhoEItemsDto.setProdutos(produtos);
+            return carrinhoEItemsDto;
     }
     public Carrinho findByUsuarioId(Long id) {
-        return carrinhoRepository.findCarrinhoByUsuarioId(id);
+        return carrinhoRepository.findCarrinhoByUsuarioStatus(id);
     }
     private boolean verSeUsuarioPossuiCarrinhoPendente(SalvarCarrinhoDto carrinho){
-        Carrinho carrinhoUsuario = carrinhoRepository.findCarrinhoByUsuarioId(carrinho.getId_usuario());
+        Carrinho carrinhoUsuario = carrinhoRepository.findCarrinhoByUsuarioStatus(carrinho.getId_usuario());
         System.out.println("aquiiii");
         System.out.println(carrinhoUsuario);
         if(carrinhoUsuario == null){
@@ -111,7 +116,6 @@ public class CarrinhoService {
                 return true;
             }
             return false;
-
         }
     }
 }
