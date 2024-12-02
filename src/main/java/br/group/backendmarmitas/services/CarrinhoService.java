@@ -93,7 +93,7 @@ public class CarrinhoService {
             List<ItemCarrinho> listaItensCarrinho = itemCarrinhoService.findByIdCarrinho(carrinho.getId());
             for (ItemCarrinho item : listaItensCarrinho) {
                 ProdutoCarrinhoDto novoProduto = new ProdutoCarrinhoDto();
-                novoProduto.setProduto(produtoService.findCompleteProductFromId(item.getProduto().getId()));
+                novoProduto.setProduto(produtoService.findById(item.getProduto().getId()));
                 novoProduto.setQuantidade(item.getQuantidade());
                 produtos.add(novoProduto);
             }
