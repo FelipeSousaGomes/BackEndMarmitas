@@ -26,7 +26,6 @@ public class ItemPedido {
     private Pedido pedido;
 
 
-
     @ManyToOne
     @JoinColumn(name = "produto_id")
     private Produto produto;

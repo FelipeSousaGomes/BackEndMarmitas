@@ -2,6 +2,7 @@ package br.group.backendmarmitas.entities;
 
 import br.group.backendmarmitas.entities.Pedido;
 import br.group.backendmarmitas.entities.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,7 +30,7 @@ public class Endereco {
     private Integer numero;
 
     @OneToMany(mappedBy = "endereco")
-    @JsonManagedReference  // Evita o loop, serializa a lista de pedidos
+    @JsonManagedReference
     private List<Pedido> pedidos;
 
     @ManyToOne

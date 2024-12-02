@@ -140,9 +140,6 @@ public class PedidoService {
 
 
 
-
-
-
     public List<PedidoDTO> findAll() {
         List<Pedido> result = pedidoRepository.findAll();
         return result.stream().map(x -> new PedidoDTO(x)).toList();
